@@ -15,17 +15,27 @@
     <div id="page-search-results">
        {% include "partials/page-header.html" %}
         <main>
+            {% if total > 0 %}
             <h4>
-                <strong>2 pontos</strong> encontrados
+                <strong>{{ total }} pontos</strong> encontrados
             </h4>
             <div class="cards">
-                <div class="card">
-                    <img src="https://www.prefeitura.sp.gov.br/cidade/secretarias/upload/Reciclagem%20900x300.jpg" alt="Colectoria">
-                    <h1>Colectoria</h1>
-                    <h3>Residuos</h3>
-                    <p>Rua Qauqluer <br/> la longe e <br/> tals</p>
-                </div>
+                {% for place in places %}
+                    <div class="card">
+                        <img src="{{ place.image }}" alt="place.nome">
+                        <h1>{{ place.name }}</h1>
+                        <h3>{{ place.items }}</h3>
+                        <p>{{ place.city }}, {{ place.state }} <br/> {{ place.address }} <br/> {{ place.adress2 }}</p>
+                    </div>
+                {% endfor %}
             </div>
+            {%else%}
+            <h4>
+            <strong>Nenhum</strong>
+             local encontrados
+            </h4>
+
+            {% endif %}
         </main>
     </div>
     
